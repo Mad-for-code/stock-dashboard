@@ -2,12 +2,22 @@
 <html>
 <head>
     <title>Stock Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/static/style/style.css">
 </head>
 <body>
-<div id="app">
-    <h1>📈 Stock Dashboard</h1>
-    <p>This is a placeholder page.</p>
+<div class="container">
+    <!-- left side bar-->
+    <div class = "sidebar">
+        <h2>companies</h2>
+        <ul id = "company-list"></ul>
+    </div>
+    <!-- main content -->
+    <div class = "main-content">
+        <h2 id = "selected-company">Select a Company</h2>
+        <canvas id = "stockChart"></canvas>
+    </div>
 </div>
-</body>
-</html>
+   <script src = "/static/js/chart-handler.js"></script>
+
+  </body>
+  </html>
