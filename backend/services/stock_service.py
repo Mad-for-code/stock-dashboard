@@ -19,6 +19,8 @@ def get_stock_stats(ticker):
     """
     Returns 52-week high, 52-week low, avg volume for a stock
     """
+
+    print("comment in get_stock_stats")
     stock = yf.Ticker(ticker)
     hist = stock.history(period="1y")  # 1 year data
 
@@ -28,6 +30,7 @@ def get_stock_stats(ticker):
     high_52 = hist["Close"].max()
     low_52 = hist["Close"].min()
     avg_volume = hist["Volume"].mean()
+    print("comment in get_stock_stats")
 
     return {
         "ticker": ticker,
