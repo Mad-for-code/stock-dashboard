@@ -6,9 +6,11 @@ from backend.services.stock_service import get_stock_data, get_stock_stats, get_
 # 1️⃣ Create Flask app instance
 app = Flask(__name__, static_folder="static", template_folder="static")
 
+
+
 # Database setup (MySQL)
 #app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:PASSWORD@localhost:3306/company_db"
-db_url = os.environ.get("DATABASE_URL", "mysql://root:QwcpSRyVvqGRFFSgUudHBEVeSfipjyds@mysql.railway.internal:3306/railway")
+db_url = os.environ.get("DATABASE_URL", "mysql+pymysql://root:QwcpSRyVvqGRFFSgUudHBEVeSfipjyds@mysql.railway.internal:3306/railway")
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
