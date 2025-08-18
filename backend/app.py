@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, request
+import os
 from flask_sqlalchemy import SQLAlchemy
 from backend.services.stock_service import get_stock_data, get_stock_stats, get_technical_indicators
 
@@ -6,7 +7,9 @@ from backend.services.stock_service import get_stock_data, get_stock_stats, get_
 app = Flask(__name__, static_folder="static", template_folder="static")
 
 # Database setup (MySQL)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:PASSWORD@localhost:3306/company_db"
+#app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:PASSWORD@localhost:3306/company_db"
+db_url = os.environ.get("DATABASE_URL", "sqlite:///company_db.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
