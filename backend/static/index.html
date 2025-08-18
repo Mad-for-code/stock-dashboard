@@ -12,12 +12,29 @@
         <ul id = "company-list"></ul>
     </div>
     <!-- main content -->
-    <div class = "main-content">
-        <h2 id = "selected-company">Select a Company</h2>
-        <canvas id = "stockChart"></canvas>
+    <div class="main-content">
+        <h2 id="selected-company">Select a company</h2>
+
+        <div id ="chart-container">
+            <div class="lds-hourglass loader" id="status-message"></div>
+            <canvas id="stockChart"></canvas>
+        </div>
     </div>
+    <div class="stats">
+        <h3>📊 Stock Stats</h3>
+        <p id="stat-high"></p>
+        <p id="stat-low"></p>
+        <p id="stat-volume"></p>
+        <p id="stat-rsi"></p>
+
+    </div>
+
+
 </div>
-   <script src = "/static/js/chart-handler.js"></script>
+
+
+<script src = "/static/js/chart-handler.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   </body>
   </html>
