@@ -2,7 +2,9 @@ import yfinance as yf
 import pandas as pd
 
 def get_stock_data(ticker,period = "1mo",interval = "1d"):
+    print("comment in get_stock_data")
     stock = yf.Ticker(ticker)
+    print("comment in get_stock_data", yf.Ticker(ticker))
     hist = stock.history(period = period , interval = interval)
     hist.reset_index(inplace=True)
     data =[]
