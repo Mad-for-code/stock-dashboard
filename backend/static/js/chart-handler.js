@@ -29,12 +29,12 @@ function selectCompany(company) {
     statusMsg.style.display = "block";
     const startTime = Date.now();
 
-    // 📊 1. Fetch chart prices
+    // Fetch chart prices
     fetch(`/prices?ticker=${company.ticker}&period=3mo&interval=1d`)
         .then(res => res.json())
         .then(data => {
         if (data.length === 0) {
-            statusMsg.textContent = "⚠️ No data available.";
+            statusMsg.textContent = "⚠ No data available.";
             return;
         }
 
@@ -49,13 +49,13 @@ function selectCompany(company) {
             chartContainer.style.display = "block";
             renderChart(dates, prices, company.ticker);
 
-            // ⏳ fetch indicators only AFTER chart exists
+            //  fetch indicators only AFTER chart exists
             fetchIndicators(company.ticker);
         }, wait);
     })
         .catch(err => console.error(err));
 
-    // 📈 2. Fetch company stats
+    //. Fetch company stats
     fetch(`/stats?ticker=${company.ticker}`)
         .then(res => res.json())
         .then(stats => {
@@ -69,7 +69,7 @@ function selectCompany(company) {
         .catch(err => console.error("Stats fetch failed:", err));
 }
 
-// 📉 Fetch indicators and add to chart
+// Fetch indicators and add to chart
 function fetchIndicators(ticker) {
     fetch(`/indicators?ticker=${ticker}`)
         .then(res => res.json())
@@ -98,7 +98,6 @@ function fetchIndicators(ticker) {
             tension: 0.1
         });
 
-        // EMA (green solid)
         stockChart.data.datasets.push({
             label: "EMA (20)",
             data: ema,
@@ -109,7 +108,6 @@ function fetchIndicators(ticker) {
 
         stockChart.update();
 
-        // RSI → stats panel
         const latestRSI = indicators.map(d => d.RSI).filter(v => v !== null).pop();
         if (latestRSI) {
             document.getElementById("stat-rsi").textContent =

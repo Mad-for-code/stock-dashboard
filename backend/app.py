@@ -3,7 +3,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from backend.services.stock_service import get_stock_data, get_stock_stats, get_technical_indicators
 
-# 1️⃣ Create Flask app instance
+#  Create Flask app instance
 app = Flask(__name__, static_folder="static", template_folder="static")
 
 
@@ -17,7 +17,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
-# 2️⃣ Company Model
+# Company Model
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ticker = db.Column(db.String(10), unique=True, nullable=False)
@@ -26,7 +26,7 @@ class Company(db.Model):
     low_52week = db.Column(db.Float)
     avg_volume = db.Column(db.Float)
 
-# 3️⃣ Seed initial companies into DB
+# 3️ Seed initial companies into DB
 def seed_companies():
     initial_companies = [
         {"ticker": "AAPL", "name": "Apple Inc."},
@@ -47,23 +47,23 @@ def seed_companies():
             db.session.add(Company(ticker=comp["ticker"], name=comp["name"]))
     db.session.commit()
 
-# 4️⃣ Initialize DB + Seed
+#  Initialize DB + Seed
 with app.app_context():
     db.create_all()
     seed_companies()
 
-# 5️⃣ Home route
+#  Home route
 @app.route("/")
 def home():
     return render_template("index.html")
 
-# 6️⃣ Companies route → fetch from DB
+#  Companies route → fetch from DB
 @app.route("/companies")
 def get_companies():
     companies = Company.query.all()
     return jsonify([{"ticker": c.ticker, "name": c.name} for c in companies])
 
-# 7️⃣ Prices route
+#rices route
 @app.route("/prices")
 def get_prices():
     ticker = request.args.get("ticker")
@@ -76,7 +76,7 @@ def get_prices():
     data = get_stock_data(ticker, period=period, interval=interval)
     return jsonify(data)
 
-# 8️⃣ Stats route
+# Stats route
 @app.route("/stats")
 def get_stats():
     ticker = request.args.get("ticker")
@@ -104,7 +104,7 @@ def get_stats():
     db.session.commit()
     return jsonify(stats)
 
-# 9️⃣ Indicators route
+# Indicators route
 @app.route("/indicators")
 def indicators():
     ticker = request.args.get("ticker")
@@ -118,6 +118,6 @@ def indicators():
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
-# 🔟 Run the app
+#  Run the app
 if __name__ == "__main__":
     app.run(debug=True)
