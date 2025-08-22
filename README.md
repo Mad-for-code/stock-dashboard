@@ -1,7 +1,8 @@
 # stock-dashboard
 It is dashboard which displays the chart of the tock of the particular company
 
-## Overview
+## Overviews
+
 A stock market dashboard built with Flask (backend), Chart.js (frontend), and live data from yfinance.
 
 ## Tech Stack
