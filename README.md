@@ -1,4 +1,4 @@
-# stock-dashboard
+# stock-dashboards
 It is dashboard which displays the chart of the tock of the particular company
 
 ## Overviews
